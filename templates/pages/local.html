@@ -1,0 +1,18 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}Mahalliy yangiliklar{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% for mahalliy_yangilik in mahalliy_yangiliklar %}
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{{ mahalliy_yangilik.get_absolute_url }}"><h3>{{ mahalliy_yangilik.title }}</h3></a>
+                    <p>{{ mahalliy_yangilik.body }}</p>
+                    <img src="{{ mahalliy_yangilik.image.url }}">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

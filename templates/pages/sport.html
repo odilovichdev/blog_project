@@ -1,0 +1,18 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}Sport yangiliklar{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% for sport_yangilik in sport_yangiliklar %}
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{{ sport_yangilik.get_absolute_url }}"><h3>{{ sport_yangilik.title }}</h3></a>
+                    <p>{{ sport_yangilik.body }}</p>
+                    <img src="{{ sport_yangilik.image.url }}">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

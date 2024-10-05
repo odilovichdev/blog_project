@@ -1,0 +1,10 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}
+    Log Out
+{% endblock %}
+
+{% block content %}
+    <h1>Log Out</h1>
+    <p>Siz web saytdan chiqdingiz. <a href="{% url 'login_page' %}" class="btn btn-info">Qayta kirish</a></p>
+{% endblock %}

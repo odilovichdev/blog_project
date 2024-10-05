@@ -1,0 +1,18 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}Texnologiya yangiliklar{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% for texnologik_yangilik in texnologiya_yangiliklar %}
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{{ texnologik_yangilik.get_absolute_url }}"><h3>{{ texnologik_yangilik.title }}</h3></a>
+                    <p>{{ texnologik_yangilik.body }}</p>
+                    <img src="{{ texnologik_yangilik.image.url }}">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

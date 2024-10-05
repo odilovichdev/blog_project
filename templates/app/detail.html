@@ -1,0 +1,73 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load hitcount_tags %}
+{% block title %}News detail page{% endblock %}
+
+{% block content %}
+    <h1>{{ object.title }}</h1>
+    <p>Published date: {{ object.publish_time }}</p>
+    <h3>Ko'rishlar soni: <i class="fa fa-eye" aria-hidden="true">{% get_hit_count for object %}</i></h3>
+    <h3>Bu xabarga {{ comments.count }} ta izoh bildirilgan!</h3>
+    <p><img src="{{ object.image.url }}"></p>
+    <p>{{ object.body | linebreaks }}</p>
+
+    {% if request.user.is_authenticated and request.user.is_superuser %}
+        <div class="card-footer text-center">
+            <a href="{% url 'news_edit_page' object.slug %}" class="btn btn-danger ml-2">Edit</a>|
+            <a href="{% url 'news_delete_page' object.slug %}" class=" btn btn-info ml-2">Delete</a>
+        </div>
+    {% endif %}<br>
+    <h2>Izohlar</h2>
+    {% for comment in object.comments.all %}
+        <p>
+            <strong>
+                {{ comment.user }}:
+                <span>{{ comment.comment }}</span>
+            </strong>
+        </p>
+    {% endfor %}
+    {% if request.user.is_authenticated %}
+        <h2>Izoh qoldirish</h2>
+        <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Qo'shish</button>
+        </form>
+    {% else %}
+        <div class="card-body">
+            <p class="text-danger">
+                Faqat ro'yxatdan o'tgan foydalanuvchilar izoh qoldirishi mumkin
+            </p>
+            <p>
+                Izoh qoldirish uchun
+                <a href="{% url 'signup_page' %}" style="color: crimson">ro'yxatdan o'ting</a>
+                yoki <a href="{% url 'login_page' %}" style="color: crimson">login qiling</a>
+            </p>
+        </div>
+    {% endif %}
+
+
+    {#    {% if user.is_authenticated %}#}
+    {##}
+    {#    <div class="col-md-8 card mb-4 mt-3">#}
+    {#        <div class="card-body">#}
+    {#            <h3>Izoh qoldirish</h3>#}
+    {#            <form method="post" style="margin-top:1.3em">{% csrf_token %}#}
+    {#                {{ comment_form.as_p }}#}
+    {#                <button type="submit" class="btn btn-primary btn-lg">Yuborish</button>#}
+    {#            </form>#}
+    {#        </div>#}
+    {#    </div>#}
+    {#    {% else %}#}
+    {#    <div class="card-body">#}
+    {#        <p class="text-danger">#}
+    {#            Faqat ro'yxatdan o'tgan foydalanuvchilar izoh qoldirishi mumkin#}
+    {#        </p>#}
+    {#        <p>#}
+    {#            Izoh qoldirish uchun#}
+    {#            <a href="{% url 'signup_page' %}" style="color: crimson">ro'yxatdan o'ting</a>#}
+    {#            yoki <a href="{% url 'login_page' %}" style="color: crimson">login qiling</a>#}
+    {#        </p>#}
+    {#    </div>#}
+    {#    {% endif %}#}
+
+{% endblock %}

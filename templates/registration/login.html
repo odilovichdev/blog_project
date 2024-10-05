@@ -1,0 +1,23 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <h2>Web-saytga kirish - login </h2>
+        <p>Iltimos, saytga kirish uchun formani to'ldiring</p>
+        <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-group">
+                <button class="btn btn-outline-info btn-green" type="submit">Login</button>
+                <small class="text-muted ml-2 btn-red">
+                    <a href="{% url 'password_reset' %}">Forgot Password?</a>
+                </small>
+            </div>
+        </form>
+        <h4><a href="{% url 'signup_page' %}" class="btn btn-outline-info btn-green">Sign Up</a></h4>
+    </div>
+
+{% endblock %}

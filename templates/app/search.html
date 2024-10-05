@@ -1,0 +1,14 @@
+{% extends 'app/base.html' %}
+{% block title %}
+Search result
+{% endblock %}
+
+{% block content %}
+    <h2>Qidiruv natijalari</h2>
+    {% for all_new in all_news %}
+        <h3><a href="{% url 'news_detail_page' all_new.slug %}" class="text-danger">{{ all_new.title }}</a> </h3>
+        <p><img src="{{ all_new.image.url }}" width="30%"></p>
+        <p>{{ all_new.body|truncatewords:10 }}</p>
+    {% endfor %}
+
+{% endblock %}

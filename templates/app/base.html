@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/li-scroller.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/slick.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/jquery.fancybox.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/theme.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+
+</head>
+<body>
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+<a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
+<div class="container">
+    <header id="header">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="header_top">
+                    <div class="header_top_left">
+                        <ul class="top_nav">
+                            <li><a href="{% url 'home_page' %}">{% blocktrans  %}Bosh sahifa{% endblocktrans %}</a></li>
+                            <li><a href="#">{% blocktrans %}Biz haqimizda{% endblocktrans %}</a></li>
+                            <li><a href="{% url 'contact_page' %}">{% blocktrans %}Biz bilan aloqa{% endblocktrans %}</a></li>
+                            {% if request.user.is_superuser %}
+                                <li><a href="{% url 'admin_page' %}">{% blocktrans %}Admin page{% endblocktrans %}</a></li>
+                            {% endif %}
+
+                            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                                <input name="next" type="hidden" value="{{ redirect_to }}">
+                                <select name="language">
+                                    {% get_current_language as LANGUAGE_CODE %}
+                                    {% get_available_languages as LANGUAGES %}
+                                    {% get_language_info_list for LANGUAGES as languages %}
+                                    {% for language in languages %}
+                                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                                                selected{% endif %}>
+                                            {{ language.name_local }} ({{ language.code }})
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                                <input type="submit" value="Go">
+                            </form>
+
+                        </ul>
+                    </div>
+                    <div class="header_top_right">
+                        <p>
+                            {% if request.user.is_authenticated %}
+                                <a href="{% url 'profile_page' %}" style="color: crimson">My Profile</a>
+                                <a href="{% url 'logout_page' %}" style="color: greenyellow">Log Out</a>
+
+                            {% else %}
+                                <a href="{% url 'login_page' %}" style="color: crimson">Login</a>
+                            {% endif %}
+                        </p>
+                        <p>{% now "jS F Y H:i" %}</p>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="header_bottom">
+                    <div class="logo_area"><a href="{% url 'home_page' %}" class="logo"><img
+                            src="{% static "images/logo.jpg" %}"
+                            alt=""></a>
+                    </div>
+                    <div class="add_banner"><a href="#"><img src="{% static "images/addbanner_728x90_V1.jpg" %}" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="navArea">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar"><span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav main_nav">
+                    <li class="active"><a href="{% url 'home_page' %}"><span
+                            class="fa fa-home desktop-home"></span><span
+                            class="mobile-show">Home</span></a></li>
+                    <li><a href="{% url 'local_page' %}">{% blocktrans %}Mahalliy{% endblocktrans %}</a></li>
+                    <li><a href="{% url 'sport_page' %}">{% blocktrans %}Sport{% endblocktrans %}</a></li>
+                    <li><a href="{% url 'technology_page' %}">{% blocktrans %}Texnologiya{% endblocktrans %}</a></li>
+                    <li><a href="{% url 'foreign_page' %}">{% blocktrans %}Xorijiy{% endblocktrans %}</a></li>
+                    <li><a href="{% url 'contact_page' %}">{% blocktrans %}Biz bilan aloqa{% endblocktrans %}</a></li>
+                    <li>
+                        <form method="get" action="{% url 'search_page' %}">{% csrf_token %}
+                            <input type="search" name="search" placeholder="Qidiruv..." class="form-control">
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </section>
+    <section id="newsSection">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="latest_newsarea"><span>{% blocktrans %}Eng so'ngi yangiliklar{% endblocktrans %}</span>
+                    <ul id="ticker01" class="news_sticker">
+                        {% for latest_new in latest_news %}
+                            <li><a href="{% url 'news_detail_page' latest_new.pk %}"><img
+                                    src="{{ latest_new.image.url }}" alt="">{{ latest_new.title }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    <div class="social_area">
+                        <ul class="social_nav">
+                            <li class="facebook"><a href="#"></a></li>
+                            <li class="twitter"><a href="#"></a></li>
+                            <li class="flickr"><a href="#"></a></li>
+                            <li class="pinterest"><a href="#"></a></li>
+                            <li class="googleplus"><a href="#"></a></li>
+                            <li class="vimeo"><a href="#"></a></li>
+                            <li class="youtube"><a href="#"></a></li>
+                            <li class="mail"><a href="#"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% include 'pages/footer.html' %}
+
+</div>
+
+{% include 'pages/static.html' %}
+
+</body>
+</html>

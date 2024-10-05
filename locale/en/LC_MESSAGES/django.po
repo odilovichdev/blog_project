@@ -1,0 +1,83 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-26 15:47+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: root/settings.py:113
+msgid "Uzbek"
+msgstr "Uzbek"
+
+#: root/settings.py:114
+msgid "English"
+msgstr "English"
+
+#: root/settings.py:115
+msgid "Russian"
+msgstr "English"
+
+#: templates/app/base.html:34 templates/index.html:6
+msgid "Bosh sahifa"
+msgstr "Home page"
+
+#: templates/app/base.html:35
+msgid "Biz haqimizda"
+msgstr "About Us"
+
+#: templates/app/base.html:36 templates/app/base.html:104
+msgid "Biz bilan aloqa"
+msgstr "Contact"
+
+#: templates/app/base.html:38
+msgid "Admin page"
+msgstr "Admin page"
+
+#: templates/app/base.html:100 templates/index.html:71
+#: templates/pages/footer.html:15
+msgid "Mahalliy"
+msgstr "Local"
+
+#: templates/app/base.html:101 templates/index.html:123
+#: templates/pages/footer.html:16
+msgid "Sport"
+msgstr "Sport"
+
+#: templates/app/base.html:102 templates/index.html:170
+#: templates/pages/footer.html:18
+msgid "Texnologiya"
+msgstr "Technology"
+
+#: templates/app/base.html:103
+msgid "Xorijiy"
+msgstr "Foreign"
+
+#: templates/app/base.html:117
+msgid "Eng so'ngi yangiliklar"
+msgstr "The Latest news"
+
+#: templates/index.html:33
+msgid "So'ngi yangiliklar"
+msgstr "Latest news"
+
+#: templates/index.html:280 templates/pages/footer.html:17
+msgid "Xorij"
+msgstr "Foreign"
+
+#: templates/index.html:332
+msgid "Ommabop"
+msgstr "Popular "
+

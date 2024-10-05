@@ -1,0 +1,27 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}
+    My profile
+{% endblock %}
+
+{% block content %}
+
+    <h1>Profilingizga xush kelibsiz</h1>
+    {% if profile_info.image %}
+        <img src="{{ profile_info.image.url }}" width="20%"><br>
+    {% endif %}
+    <label>Username: </label>
+    <input value="{{ user.username }}" readonly placeholder="Kiritilmagan"><br>
+    <label>Email: </label>
+    <input value="{{ user.email }}" readonly placeholder="Kiritilmagan"><br>
+    <label>Fullname: </label>
+    <input value="{{ user.get_full_name }}" readonly placeholder="Kiritilmagan"><br>
+    <label>Birth date</label>
+    {% if profile_info %}
+        <input value="{{ profile_info.date_of_birth }}" readonly placeholder="Kiritilmagan"><br>
+    {% endif %}
+    <h1 class="btn btn-info ml-2"><a href="{% url "password_change" %}">Passwordni almashtirish</a></h1>|
+    <h2 class="btn btn-info ml-2"><a href="{% url 'user_profile_info' %}">Edit profile</a></h2>|
+    <h2 class="btn btn-info ml-2"><a href="{% url 'logout_page' %}">Accountdan chiqish</a></h2><br>
+
+{% endblock %}

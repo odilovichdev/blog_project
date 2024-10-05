@@ -1,0 +1,13 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Delete Page{% endblock %}
+
+{% block content %}
+    <h2 class="text-center">Joriy yangilikni o'chirish</h2>
+    <form method="post">
+    {% csrf_token %}
+        <p>{{ news.title | truncatewords:3 }}... Siz bu yangilikni o'chirishni xohlyasizmi?</p>
+        <button type="submit" class="btn btn-info ml-2">Delete</button>
+    </form>
+
+{% endblock %}

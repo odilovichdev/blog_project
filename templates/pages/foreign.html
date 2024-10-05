@@ -1,0 +1,18 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block title %}Xorijiy yangiliklar{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% for xorij_yangilik in xorijiy_yangiliklar %}
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{{ xorij_yangilik.get_absolute_url }}"><h3>{{ xorij_yangilik.title }}</h3></a>
+                    <p>{{ xorij_yangilik.body }}</p>
+                    <img src="{{ xorij_yangilik.image.url }}">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

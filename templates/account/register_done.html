@@ -1,0 +1,10 @@
+{% extends 'app/base.html' %}
+
+{% block title %}
+    Sign Up
+{% endblock %}
+
+{% block content %}
+    <h1>{{ new_user.first_name }} siz muvaffaqiyatli ro'yhatdan o'tdingiz</h1>
+    <p>Siz endi <a href="{% url 'login_page' %}" style="color: crimson">login</a> qilishingiz mumkin </p>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'app/base.html' %}
+{% block title %}
+    Admin pages
+{% endblock %}
+
+{% block content %}
+    <table class="table table-bordered table-responsive table-striped">
+        <tr>
+            <th>
+                Username
+            </th>
+            <th>
+                First_name
+            </th>
+            <th>
+                Last name
+            </th>
+            <th>
+                Email
+            </th>
+        </tr>
+        {% for user_admin in user_admins %}
+            <tr>
+                <td>
+                    {{ user_admin.username }}
+                </td>
+                <td>
+                    {{ user_admin.first_name }}
+                </td>
+                <td>
+                    {{ user_admin.last_name }}
+                </td>
+                <td>
+                    {{ user_admin.email }}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <h1>News <a href="{% url 'news_create_page' %}" class=" btn btn-danger">create</a> </h1>
+{% endblock %}
